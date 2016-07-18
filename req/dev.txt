@@ -1,0 +1,2 @@
+numpy
+-U scikit-image
