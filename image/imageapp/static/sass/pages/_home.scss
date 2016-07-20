@@ -1,0 +1,30 @@
+.page-wrapper{
+  max-width: 1440px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding-top: 500px;
+}
+
+
+.step-title{
+  width: 180px;
+  margin-bottom: 44px;
+}
+
+.image-holder, .mask-holder, .image-final{
+  width: 100%;
+  display: none;
+}
+
+footer{
+  position: fixed;
+  left:0; right:0;
+  bottom:36px;
+  text-align: center;
+  color:#042f40;
+
+  @include respond-to(phablet){
+    position: relative;
+    margin: 40px auto;
+  }
+}

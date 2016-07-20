@@ -29,6 +29,7 @@ class ObjectRemove(object):
 	def create_mask(self):
 		masked_img = self.img.copy()
 
+		#poly = [(41, 122), (40, 213), (108, 213), (113, 136)]
 		poly = [(89, 188), (88, 263), (204, 260), (214, 188)]
 		pr = np.array([p[0] for p in poly])
 		pc = np.array([p[1] for p in poly])
@@ -43,10 +44,3 @@ class ObjectRemove(object):
 		out = transform.seam_carve(self.img, self.eimg, 'vertical', 90)
 		resized = transform.resize(self.img, out.shape)
 		return out
-
-
-obj = ObjectRemove()
-obj.set_image("3.jpg")
-obj.create_mask()
-plt.imshow(obj.remove_object())
-plt.show()

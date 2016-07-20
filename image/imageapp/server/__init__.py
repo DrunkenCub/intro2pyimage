@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from werkzeug import secure_filename
 from helper import ImageCRUD
 import os
-from flask import jsonify
+from flask import jsonify, session
 from ..object_remove import ObjectRemove
 from matplotlib import pyplot as plt
 
@@ -16,11 +16,16 @@ def upload():
 	try:
 		if request.method == 'POST':
 			f = request.files['file']
-			f.save(secure_filename(f.filename))
-			_saveFiles(f)
-			return 'file uploaded successfully'
+			filename = secure_filename(f.filename)
+			f.save(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "uploads", filename))
+			image = _saveFiles(f.filename)
+			session['filename'] = image.title
+			session['filepath'] = image.image_url
+			return render_template('index.html', image=image)
 	except Exception as e:
 		raise e
+
+	return render_template('index.html', image=None)
 
 @bp.route('/uploader')
 def uploader():
@@ -36,20 +41,20 @@ def list():
 def object_remove():
 	image = None
 	if request.method == 'POST':
-		file = request.form.get('file_name', None)
-		print file
 		obj = ObjectRemove()
-		obj.set_image(file)
+		print type(session['filepath'])
+		print str(session['filepath'])
+		obj.set_image(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static") + "/" + str(session['filepath']))
 		obj.create_mask()
 		new_image = obj.remove_object()
-		plt.imsave("3new.jpg" , new_image)
-		image = _saveFiles(file)
-	return render_template('show.html', image=image)
+		plt.imsave(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "uploads", "result.jpg") , new_image)
+		image = _saveFiles("result.jpg")
 
-def _saveFiles(file):
+	return render_template('index.html', image=image)
+
+def _saveFiles(filename):
 	image_crud = ImageCRUD()
-	return image_crud.create(title=file, 
-		image_url= os.path.abspath(
-			os.path.dirname(os.path.dirname(os.path.dirname(__file__)))) + "/" + "3new.jpg")
+	return image_crud.create(title=filename, 
+		image_url= "uploads" + "/" + filename)
 
 
