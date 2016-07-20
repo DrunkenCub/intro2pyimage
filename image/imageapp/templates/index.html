@@ -31,8 +31,13 @@
             <div class="text-center">
             <form name = "1" action = "http://localhost:8080/server/upload" method = "POST" 
                  enctype = "multipart/form-data">
-                 <input type = "file" name = "file" />
-                 <button type = "submit" class="button-special">Upload Photo</button>
+                <div class="fileUpload btn btn-primary">
+                        <span>Choose File</span>
+                        <input type = "file" name = "file" class="upload"/>
+                </div>
+                <div class="text-center">
+                    <button type = "submit" class="button-special marginTop48">Upload Photo</button>
+                </div>
               </form>
             </div>
 
