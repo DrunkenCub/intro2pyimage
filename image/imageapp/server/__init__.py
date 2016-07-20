@@ -7,6 +7,7 @@ import os
 from flask import jsonify, session
 from ..object_remove import ObjectRemove
 from matplotlib import pyplot as plt
+import random
 
 
 bp = Blueprint('server', __name__)
@@ -42,13 +43,14 @@ def object_remove():
 	image = None
 	if request.method == 'POST':
 		obj = ObjectRemove()
-		print type(session['filepath'])
-		print str(session['filepath'])
+		print session['filepath']
+		print session['filepath']
 		obj.set_image(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static") + "/" + str(session['filepath']))
 		obj.create_mask()
 		new_image = obj.remove_object()
-		plt.imsave(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "uploads", "result.jpg") , new_image)
-		image = _saveFiles("result.jpg")
+		result_image_name = "result" + str(random.randint(0,10000)) + ".jpg" 
+		plt.imsave(os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "uploads", result_image_name) , new_image)
+		image = _saveFiles(result_image_name)
 
 	return render_template('index.html', image=image)
 

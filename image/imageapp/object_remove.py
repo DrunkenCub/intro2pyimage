@@ -29,7 +29,8 @@ class ObjectRemove(object):
 	def create_mask(self):
 		masked_img = self.img.copy()
 
-		#poly = [(41, 122), (40, 213), (108, 213), (113, 136)]
+		#poly = [(2018, 2043), (2018, 2761), (2918, 2741), (2887, 2342)]
+		# poly = [(41, 122), (40, 213), (108, 213), (113, 136)]
 		poly = [(89, 188), (88, 263), (204, 260), (214, 188)]
 		pr = np.array([p[0] for p in poly])
 		pc = np.array([p[1] for p in poly])
