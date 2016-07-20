@@ -1,0 +1,8 @@
+<html>
+	<body>
+		<h1> List of Images </h1>
+		{% for image in images %}
+			<span>{{ image.title }}</span> : <span> {{ image.image_url }} </span>
+		{% endfor %}
+	</body>
+</html>
