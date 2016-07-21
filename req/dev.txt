@@ -1,3 +1,6 @@
+numpy==1.11.1
+matplotlib==1.5.1
+scikit-image==0.12.3
 click==6.6
 cycler==0.10.0
 dask==0.10.1
@@ -9,15 +12,13 @@ Jinja2==2.8
 MarkupSafe==0.23
 matplotlib==1.5.1
 networkx==1.11
-numpy==1.11.1
 Pillow==3.3.0
 pyparsing==2.1.5
 python-dateutil==2.5.3
 pytz==2016.6.1
-scikit-image==0.12.3
 scipy==0.17.1
 six==1.10.0
 SQLAlchemy==1.0.14
 toolz==0.8.0
 Werkzeug==0.11.10
-numpy
+
